@@ -160,14 +160,27 @@ Invoke-RestMethod -Uri "http://localhost:8000/predict/image" -Method Post -Form 
 ```
 *(Note : Pour les images, assurez-vous que le format de l'image est compatible avec ce que le modèle attend, par exemple JPEG ou PNG.)*
 
-### Importation de l'Image Docker
+### Partage de l'Image Docker
 
-1.  **Importer l'image Docker depuis le fichier `.tar` :**
-    Charger l'image dans son Docker local avec la commande suivante :
-    ```bash
-    docker load -i image-texte-api.tar
-    ```
-    Une fois cette commande exécutée, l'image `image-texte-api` sera disponible localement et pourra être lancée comme décrit dans la section "Lancement de l'API FastAPI".
+Pour utiliser l'image Docker `image-texte-api` qui vous a été partagée, suivez l'une des méthodes ci-dessous :
+
+#### Méthode 1 : Depuis un Registre Docker (Exemple : Docker Hub)
+
+Si l'image est hébergée sur un registre comme Docker Hub (par exemple, sous le nom `zehelhh/image-texte-api:latest`), vous pouvez la récupérer avec la commande suivante :
+
+```bash
+docker pull zehelhh/image-texte-api:latest
+```
+Une fois l'image téléchargée, elle peut être lancée comme décrit dans la section "[Lancement de l'API FastAPI](#lancement-de-lapi-fastapi)".
+
+#### Méthode 2 : Depuis un Fichier Archive (`.tar`)
+
+Si vous avez reçu un fichier archive de l'image (par exemple, `image-texte-api.tar`), vous pouvez la charger dans votre Docker local avec la commande suivante :
+
+```bash
+docker load -i image-texte-api.tar
+```
+Une fois cette commande exécutée, l'image `image-texte-api` (ou le nom sous lequel elle a été sauvegardée) sera disponible localement et pourra être lancée comme décrit dans la section "[Lancement de l'API FastAPI](#lancement-de-lapi-fastapi)".
 
 ## Performances des Modèles
 
