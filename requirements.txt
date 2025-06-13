@@ -1,0 +1,22 @@
+# Core dependencies for Hugging Face Transformers
+transformers>=4.21.0
+torch>=1.12.0
+torchvision>=0.13.0
+torchaudio>=0.12.0
+
+# Datasets and data processing
+datasets>=2.4.0
+pandas>=1.4.0
+numpy>=1.21.0
+
+# Machine Learning and evaluation metrics
+scikit-learn>=1.1.0
+
+# Tokenizers (usually installed with transformers but explicit for clarity)
+tokenizers>=0.12.0
+
+# Optional: Accelerate for faster training
+accelerate>=0.12.0
+tensorboard>=2.9.0
+tqdm>=4.64.0
+requests>=2.28.0
