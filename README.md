@@ -198,18 +198,6 @@ Entraîné sur le dataset AG News (classification de catégories d'actualités).
 
 Ces métriques ont été obtenues après l'entraînement et l'évaluation du modèle sauvegardé dans `models/text_classifier_hugging_face_model`.
 
-## Contribution
-
-Pour contribuer à ce projet :
-
-1.  Forkez le dépôt sur GitHub.
-2.  Créez une nouvelle branche pour votre fonctionnalité ou correction : `git checkout -b ma-fonctionnalite`
-3.  Effectuez vos modifications et validez-les : `git commit -m 'Ajout d\'une nouvelle fonctionnalité'`
-4.  Poussez vos modifications vers votre fork : `git push origin ma-fonctionnalite`
-5.  Ouvrez une Pull Request sur le dépôt d'origine pour examen.
-
-Veuillez vous assurer que votre code respecte les normes de style du projet et inclut des tests appropriés pour toute nouvelle fonctionnalité ou correction de bogue.
-
 ## Auteurs
 
 - **EGAIN Louise** - *Développement et documentation* - [Profil GitHub](https://github.com/louiseegain)
