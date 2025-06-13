@@ -160,6 +160,15 @@ Invoke-RestMethod -Uri "http://localhost:8000/predict/image" -Method Post -Form 
 ```
 *(Note : Pour les images, assurez-vous que le format de l'image est compatible avec ce que le modèle attend, par exemple JPEG ou PNG.)*
 
+### Importation de l'Image Docker
+
+1.  **Importer l'image Docker depuis le fichier `.tar` :**
+    Charger l'image dans son Docker local avec la commande suivante :
+    ```bash
+    docker load -i image-texte-api.tar
+    ```
+    Une fois cette commande exécutée, l'image `image-texte-api` sera disponible localement et pourra être lancée comme décrit dans la section "Lancement de l'API FastAPI".
+
 ## Performances des Modèles
 
 ### Modèle de Classification d'Images (ResNet18)
