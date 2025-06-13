@@ -1,0 +1,175 @@
+# Configuration pour le modèle de classification d'images
+
+# Modèle
+model:
+  # Architecture du modèle (resnet18, resnet50, efficientnet_b0, etc.)
+  architecture: "resnet50"
+  
+  # Nombre de classes à classifier
+  num_classes: 32
+  
+  # Utiliser un modèle pré-entraîné
+  pretrained: true
+  
+  # Geler les couches initiales pour le transfer learning
+  freeze_backbone: true
+  
+  # Nombre de couches à dégeler progressivement
+  unfreeze_layers: 2
+
+# Données
+data:
+  # Taille des images d'entrée
+  image_size: 224
+  
+  # Chemins des données
+  dataset_path: "data/raw"
+  processed_path: "data/processed"
+  samples_path: "data/samples"
+  
+  # Division train/val/test
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  
+  # Seed pour la reproductibilité
+  random_seed: 42
+  
+  # Normalisation ImageNet
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# Augmentation de données
+augmentation:
+  # Augmentations pour l'entraînement
+  train:
+    horizontal_flip: 0.5
+    rotation_degrees: 15
+    color_jitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      hue: 0.1
+    random_crop:
+      scale: [0.8, 1.0]
+      ratio: [0.75, 1.33]
+    gaussian_blur: 0.1
+    
+  # Augmentations pour la validation (minimal)
+  val:
+    center_crop: 224
+    
+  # Augmentations pour le test (minimal)
+  test:
+    center_crop: 224
+
+# Entraînement
+training:
+  # Hyperparamètres
+  batch_size: 32
+  num_epochs: 50
+  learning_rate: 0.001
+  weight_decay: 1e-4
+  
+  # Optimizer
+  optimizer: "adam"  # adam, sgd, adamw
+  momentum: 0.9  # pour SGD
+  
+  # Scheduler de learning rate
+  scheduler:
+    type: "step"  # step, cosine, plateau
+    step_size: 15  # pour StepLR
+    gamma: 0.1     # facteur de réduction
+    patience: 5    # pour ReduceLROnPlateau
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+    monitor: "val_acc"  # val_loss, val_acc
+  
+  # Gradient clipping
+  gradient_clip: 1.0
+  
+  # Fréquence d'évaluation
+  eval_every: 5  # epochs
+
+# Validation et métriques
+evaluation:
+  # Métriques à calculer
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "confusion_matrix"
+  
+  # Seuil de classification
+  threshold: 0.5
+  
+  # Classes à analyser en détail
+  detailed_analysis: true
+
+# Sauvegarde
+checkpoint:
+  # Dossier de sauvegarde
+  save_dir: "models/image_classification"
+  
+  # Nom du modèle
+  model_name: "image_classifier_resnet50"
+  
+  # Sauvegarder le meilleur modèle
+  save_best: true
+  
+  # Sauvegarder à chaque époque
+  save_every_epoch: false
+  
+  # Garder seulement les N meilleurs checkpoints
+  keep_top_k: 3
+
+# Logging et monitoring
+logging:
+  # Niveau de log
+  level: "INFO"
+  
+  # Dossier des logs
+  log_dir: "results/logs"
+  
+  # Wandb (optionnel)
+  wandb:
+    enabled: false
+    project: "image-classification-32classes"
+    entity: null
+    tags: ["resnet50", "32classes", "transfer-learning"]
+  
+  # TensorBoard
+  tensorboard:
+    enabled: true
+    log_dir: "results/tensorboard"
+
+# Déploiement
+deployment:
+  # Format de sauvegarde pour déploiement
+  export_format: "pytorch"  # pytorch, onnx, torchscript
+  
+  # Optimisations pour l'inférence
+  optimize_for_inference: true
+  
+  # Quantification (optionnel)
+  quantization:
+    enabled: false
+    method: "dynamic"  # dynamic, static
+
+# Debug et développement
+debug:
+  # Mode debug
+  enabled: false
+  
+  # Utiliser un subset des données pour tests rapides
+  use_subset: false
+  subset_size: 1000
+  
+  # Profiling
+  profile_training: false
