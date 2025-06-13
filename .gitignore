@@ -37,8 +37,7 @@ venv.bak/
 
 # ===== MACHINE LEARNING / DATA =====
 # Datasets (souvent volumineux)
-data/raw/
-data/processed/
+data/
 *.csv
 *.tsv
 *.parquet
@@ -55,6 +54,7 @@ data/processed/
 *.onnx
 models/*/pytorch_model.bin
 models/*/model.safetensors
+/results/*/*.safetensors
 
 # Logs et métriques
 logs/
@@ -83,6 +83,7 @@ Thumbs.db
 
 # ===== DOCKER =====
 .dockerignore
+*.tar
 
 # ===== TESTS ET COVERAGE =====
 .pytest_cache/

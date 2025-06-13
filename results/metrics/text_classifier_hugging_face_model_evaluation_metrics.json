@@ -1,0 +1,16 @@
+{
+    "model_name_trained": "distilbert-base-uncased",
+    "model_saved_path": "models/text_classifier_hugging_face_model",
+    "evaluation_metrics": {
+        "eval_loss": 0.1874980628490448,
+        "eval_accuracy": 0.9468421052631579,
+        "eval_f1": 0.9469386465793795,
+        "eval_precision": 0.9471027435922872,
+        "eval_recall": 0.9468421052631579,
+        "eval_runtime": 7.8593,
+        "eval_samples_per_second": 967.008,
+        "eval_steps_per_second": 60.438,
+        "epoch": 3.0
+    },
+    "timestamp": "2025-06-13T19:34:18.914284"
+}

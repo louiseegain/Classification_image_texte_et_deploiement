@@ -20,3 +20,11 @@ accelerate>=0.12.0
 tensorboard>=2.9.0
 tqdm>=4.64.0
 requests>=2.28.0
+
+# FastAPI and Uvicorn for API deployment
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+python-multipart>=0.0.5 # For file uploads
+
+# Matplotlib for plotting and image visualization
+matplotlib>=3.5.0

@@ -6,7 +6,7 @@ from transformers import (
     AutoModelForSequenceClassification,
     TrainingArguments,
     Trainer,
-    pipeline,
+    pipeline as hf_pipeline,  # Alias pour éviter la collision de noms
     DataCollatorWithPadding
 )
 from datasets import load_dataset, DatasetDict
@@ -262,7 +262,7 @@ class TextClassificationPipeline:
             data_collator=data_collator,
         )
 
-        self.trainer.train()
+        self.trainer.train(resume_from_checkpoint=True)
 
         print("Fine-tuning terminé!")
 
@@ -355,22 +355,35 @@ class TextClassificationPipeline:
         if self.model is None or self.tokenizer is None:
             raise ValueError("Le modèle doit être initialisé/chargé avant la prédiction")
 
-        classifier = pipeline(
+        classifier = hf_pipeline(  # Utilisation de l'alias
             "text-classification",
             model=self.model,
             tokenizer=self.tokenizer,
-            return_all_scores=True
+            top_k=None
         )
 
-        predictions = []
-        for text in texts:
-            result = classifier(text)
-            predictions.append({
-                "text": text,
-                "predictions": result
+        predictions_list = [] # Renommé pour éviter la confusion avec la variable de la boucle externe
+        for text_item in texts: # text_item est une chaîne de caractères unique
+            raw_hf_result = classifier(text_item)
+
+            processed_scores = raw_hf_result
+
+            if isinstance(raw_hf_result, list) and \
+               len(raw_hf_result) == 1 and \
+               isinstance(raw_hf_result[0], list) and \
+               all(isinstance(item, dict) for item in raw_hf_result[0]):
+                processed_scores = raw_hf_result[0]
+            elif not (isinstance(raw_hf_result, list) and all(isinstance(item, dict) for item in raw_hf_result)):
+                print(f"Attention : Structure de sortie inattendue du pipeline Hugging Face pour le texte : '{text_item}'. Sortie : {raw_hf_result}")
+                processed_scores = []
+
+
+            predictions_list.append({
+                "text": text_item,
+                "predictions": processed_scores
             })
 
-        return predictions
+        return predictions_list
 
     def run_complete_pipeline(self, dataset_name: str, model_name: str = None,
                               save_path: str = "./fine_tuned_model"):
@@ -411,29 +424,91 @@ class TextClassificationPipeline:
         print("\n7. Sauvegarde du modèle:")
         self.save_model(save_path)
 
-        print("\n=== PIPELINE TERMINÉ AVEC SUCCÈS ===")
+        print("\\n8. Sauvegarde des métriques d\'évaluation:")
+        self._save_evaluation_metrics(eval_results, save_path)
+
+        print("\\n=== PIPELINE TERMINÉ AVEC SUCCÈS ===")
 
         return eval_results
 
+    def _save_evaluation_metrics(self, metrics: Dict[str, float], model_save_path: str):
+        """
+        Sauvegarde les métriques d'évaluation dans un fichier JSON.
+        Le fichier est sauvegardé dans results/metrics/ à partir de la racine du projet.
+        """
+        # Déterminer la racine du projet de manière robuste basé sur l'emplacement de ce script
+        script_directory = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.abspath(os.path.join(script_directory, "..", ".."))
+        
+        metrics_dir = os.path.join(project_root, "results", "metrics")
+        os.makedirs(metrics_dir, exist_ok=True)
+
+        # Utiliser le nom du modèle (dernier composant de model_save_path) pour nommer le fichier de métriques
+        model_folder_name = os.path.basename(model_save_path)
+        metrics_filename = f"{model_folder_name}_evaluation_metrics.json"
+        metrics_filepath = os.path.join(metrics_dir, metrics_filename)
+
+        # Ajouter des informations contextuelles aux métriques
+        full_metrics_data = {
+            "model_name_trained": self.model_name,
+            "model_saved_path": model_save_path,
+            "evaluation_metrics": metrics,
+            "timestamp": pd.Timestamp.now().isoformat()
+        }
+
+        with open(metrics_filepath, "w") as f:
+            json.dump(full_metrics_data, f, indent=4)
+        print(f"Métriques d\'évaluation sauvegardées dans: {metrics_filepath}")
+
 
 if __name__ == "__main__":
-    pipeline = TextClassificationPipeline()
-
-    results = pipeline.run_complete_pipeline(
+    # --- Option 1: Exécuter le pipeline complet (entraînement + sauvegarde) ---
+    text_pipeline = TextClassificationPipeline()
+    results = text_pipeline.run_complete_pipeline(
         dataset_name="ag_news",
-        model_name="distilbert-base-uncased",
-        save_path="../models/text_classifier_hugging_face_model"
+        model_name="distilbert-base-uncased", # ou un autre modèle de votre choix
+        save_path="models/text_classifier_hugging_face_model" # Corrigé pour pointer vers models/ à la racine du projet
     )
-
-    test_texts = [
+    
+    test_texts_after_train = [
         "Apple announces new iPhone with advanced AI capabilities",
         "Manchester United wins the championship",
         "Stock market reaches new heights amid economic recovery"
     ]
-
-    predictions = pipeline.predict(test_texts)
-    for pred in predictions:
-        print(f"\nTexte: {pred['text']}")
+    predictions_after_train = text_pipeline.predict(test_texts_after_train)
+    for pred in predictions_after_train:
+        print(f"\\nTexte: {pred['text']}")
         print("Prédictions:")
         for p in pred['predictions']:
             print(f"  {p['label']}: {p['score']:.4f}")
+
+    # --- Option 2: Charger un modèle sauvegardé et prédire (assurez-vous que le chemin est correct après avoir exécuté l'option 1) ---
+    # print("\\n=== CHARGEMENT D'UN MODÈLE SAUVEGARDÉ ET PRÉDICTION ===")
+    # loaded_pipeline = TextClassificationPipeline()
+    # model_path_to_load = "../../models/text_classifier_hugging_face_model" # Doit correspondre au save_path de l'option 1
+    # try:
+    #     loaded_pipeline.load_model(model_path_to_load)
+    #     print(f"Modèle chargé avec succès depuis {model_path_to_load}")
+    #
+    #     test_texts_for_loaded_model = [
+    #         "Apple announces new iPhone with advanced AI capabilities",
+    #         "Manchester United wins the championship",
+    #         "Stock market reaches new heights amid economic recovery",
+    #         "New scientific discovery about space announced today.",
+    #         "The government passed a new law regarding financial markets."
+    #     ]
+    #
+    #     predictions_from_loaded = loaded_pipeline.predict(test_texts_for_loaded_model)
+    #     for pred in predictions_from_loaded:
+    #         print(f"\\nTexte: {pred['text']}")
+    #         print("Prédictions:")
+    #         # La structure de pred['predictions'] est une liste de dictionnaires
+    #         for p_item in pred['predictions']: 
+    #             print(f"  {p_item['label']}: {p_item['score']:.4f}")
+    #             
+    # except FileNotFoundError:
+    #     print(f"Erreur : Le modèle n\'a pas été trouvé à l\'emplacement : {model_path_to_load}")
+    #     print("Veuillez d\'abord exécuter le pipeline complet (Option 1) pour entraîner et sauvegarder un modèle,")
+    #     print("ou assurez-vous que le chemin `model_path_to_load` est correct.")
+    # except Exception as e:
+    #     print(f"Une erreur est survenue lors du chargement ou de la prédiction : {e}")

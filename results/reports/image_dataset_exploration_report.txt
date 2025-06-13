@@ -1,0 +1,47 @@
+Rapport d'Exploration du Dataset d'Images
+========================================
+
+Chemin du Dataset : D:\Dev\DL\Classification_image_texte_et_deploiement\data\external\Image_Classification_Dataset_32_Classes
+Nombre total d'images : 12155
+Nombre de classes : 32
+
+Classes et nombre d'images par classe :
+- bicycle: 351
+- bird: 336
+- bread: 264
+- car: 398
+- cat: 432
+- dog: 456
+- elephant: 288
+- fish: 332
+- flower: 335
+- frog: 312
+- hamburger: 336
+- horse: 225
+- lasagna: 360
+- lion: 288
+- men: 1056
+- monkey: 288
+- moose: 336
+- motocycle: 295
+- pencil: 263
+- pichup: 238
+- pizza: 432
+- rabbit: 407
+- rat: 312
+- rhinoceros: 312
+- robot: 360
+- shark: 336
+- spagetti: 384
+- squirrel: 408
+- tiger: 288
+- turtle: 360
+- women: 1127
+- zebra: 240
+
+Informations sur des exemples d'images (les 5 premières images) :
+- 00000-3854533978.png: Taille=(512, 512), Mode=RGB
+- 00001-2814559289.png: Taille=(512, 512), Mode=RGB
+- 00001-3854533979.png: Taille=(512, 512), Mode=RGB
+- 00002-3854533980.png: Taille=(512, 512), Mode=RGB
+- 00003-3854533981.png: Taille=(512, 512), Mode=RGB

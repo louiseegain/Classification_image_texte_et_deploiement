@@ -1,0 +1,218 @@
+{
+    "model_name": "image_classifier_best.pth",
+    "dataset_evaluated": "Validation Set (recreated from training split)",
+    "num_classes": 32,
+    "total_validation_samples": 2431,
+    "accuracy": 0.9950637597696421,
+    "precision_weighted": 0.995221740298414,
+    "recall_weighted": 0.9950637597696421,
+    "f1_score_weighted": 0.99507739961002,
+    "classification_report": {
+        "bicycle": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 76.0
+        },
+        "bird": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 86.0
+        },
+        "bread": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 43.0
+        },
+        "car": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 70.0
+        },
+        "cat": {
+            "precision": 1.0,
+            "recall": 0.9878048780487805,
+            "f1-score": 0.9938650306748467,
+            "support": 82.0
+        },
+        "dog": {
+            "precision": 0.9787234042553191,
+            "recall": 0.989247311827957,
+            "f1-score": 0.983957219251337,
+            "support": 93.0
+        },
+        "elephant": {
+            "precision": 1.0,
+            "recall": 0.9838709677419355,
+            "f1-score": 0.991869918699187,
+            "support": 62.0
+        },
+        "fish": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 69.0
+        },
+        "flower": {
+            "precision": 0.9454545454545454,
+            "recall": 0.9811320754716981,
+            "f1-score": 0.9629629629629629,
+            "support": 53.0
+        },
+        "frog": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 68.0
+        },
+        "hamburger": {
+            "precision": 0.9516129032258065,
+            "recall": 1.0,
+            "f1-score": 0.9752066115702479,
+            "support": 59.0
+        },
+        "horse": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 44.0
+        },
+        "lasagna": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 73.0
+        },
+        "lion": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 69.0
+        },
+        "men": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 209.0
+        },
+        "monkey": {
+            "precision": 0.9607843137254902,
+            "recall": 1.0,
+            "f1-score": 0.98,
+            "support": 49.0
+        },
+        "moose": {
+            "precision": 0.9852941176470589,
+            "recall": 1.0,
+            "f1-score": 0.9925925925925926,
+            "support": 67.0
+        },
+        "motocycle": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 69.0
+        },
+        "pencil": {
+            "precision": 1.0,
+            "recall": 0.9347826086956522,
+            "f1-score": 0.9662921348314607,
+            "support": 46.0
+        },
+        "pichup": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 40.0
+        },
+        "pizza": {
+            "precision": 1.0,
+            "recall": 0.9775280898876404,
+            "f1-score": 0.9886363636363636,
+            "support": 89.0
+        },
+        "rabbit": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 78.0
+        },
+        "rat": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 71.0
+        },
+        "rhinoceros": {
+            "precision": 0.9846153846153847,
+            "recall": 1.0,
+            "f1-score": 0.9922480620155039,
+            "support": 64.0
+        },
+        "robot": {
+            "precision": 1.0,
+            "recall": 0.9871794871794872,
+            "f1-score": 0.9935483870967742,
+            "support": 78.0
+        },
+        "shark": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 57.0
+        },
+        "spagetti": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 75.0
+        },
+        "squirrel": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 75.0
+        },
+        "tiger": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 68.0
+        },
+        "turtle": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 73.0
+        },
+        "women": {
+            "precision": 1.0,
+            "recall": 0.9912663755458515,
+            "f1-score": 0.9956140350877193,
+            "support": 229.0
+        },
+        "zebra": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 47.0
+        },
+        "accuracy": 0.9950637597696421,
+        "macro avg": {
+            "precision": 0.9939526459038627,
+            "recall": 0.9947753685749687,
+            "f1-score": 0.9942747912005936,
+            "support": 2431.0
+        },
+        "weighted avg": {
+            "precision": 0.995221740298414,
+            "recall": 0.9950637597696421,
+            "f1-score": 0.99507739961002,
+            "support": 2431.0
+        }
+    },
+    "timestamp": "D:\\Dev\\DL\\Classification_image_texte_et_deploiement"
+}
