@@ -1,0 +1,113 @@
+# ===== PYTHON =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ===== VIRTUAL ENVIRONMENTS =====
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ===== JUPYTER NOTEBOOK =====
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ===== MACHINE LEARNING / DATA =====
+# Datasets (souvent volumineux)
+data/raw/
+data/processed/
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.hdf5
+
+# Modèles entraînés (si trop volumineux pour Git)
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.onnx
+models/*/pytorch_model.bin
+models/*/model.safetensors
+
+# Logs et métriques
+logs/
+*.log
+wandb/
+mlruns/
+.mlflow/
+
+# ===== IDE ET ÉDITEURS =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.spyderproject
+.spyproject
+
+# ===== SYSTÈME D'EXPLOITATION =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== DOCKER =====
+.dockerignore
+
+# ===== TESTS ET COVERAGE =====
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+pytest_cache/
+
+# ===== CONFIGURATION ET SECRETS =====
+.env
+.env.local
+.env.*.local
+config/secrets.yaml
+*.key
+*.pem
+
+# ===== HUGGING FACE =====
+.huggingface/
+transformers_cache/
+.cache/huggingface/
+
+# ===== TEMPORAIRES =====
+*.tmp
+*.temp
+.temp/
+temp/
